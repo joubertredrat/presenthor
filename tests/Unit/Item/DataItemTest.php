@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Tests\Unit;
+namespace Tests\Unit\Item;
 
 use PHPUnit\Framework\TestCase;
 use RedRat\Presenthor\Item\DataItemInterface;
 
 /**
- * Class PresenterDataItem Test
+ * DataItem Test
  *
  * @package Tests\Unit
  */
-class PresenterDataItemTest extends TestCase
+class DataItemTest extends TestCase
 {
     /**
      * @return void
