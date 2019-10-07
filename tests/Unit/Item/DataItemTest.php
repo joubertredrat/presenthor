@@ -10,7 +10,7 @@ use RedRat\Presenthor\Item\DataItemInterface;
 /**
  * DataItem Test
  *
- * @package Tests\Unit
+ * @package Tests\Unit\Item
  */
 class DataItemTest extends TestCase
 {
