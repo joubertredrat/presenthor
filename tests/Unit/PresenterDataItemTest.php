@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
+use RedRat\Presenthor\Item\DataItemInterface;
 
 /**
  * Class PresenterDataItem Test
@@ -18,6 +19,19 @@ class PresenterDataItemTest extends TestCase
      */
     public function testInstanceOf(): void
     {
-        self::assertInstanceOf(PresenterDataItemInterface::class, null);
+        $dataItem = self::getItemObject();
+
+        self::assertInstanceOf(DataItemInterface::class, $dataItem);
+    }
+
+    /**
+     * @return DataItemInterface
+     */
+    public static function getItemObject(): DataItemInterface
+    {
+        return new class implements DataItemInterface
+        {
+
+        };
     }
 }

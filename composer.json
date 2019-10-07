@@ -13,7 +13,7 @@
   "minimum-stability": "stable",
   "autoload": {
     "psr-4": {
-      "RedRat\\": "src/"
+      "RedRat\\Presenthor\\": "src/"
     }
   },
   "autoload-dev": {
@@ -32,6 +32,7 @@
       "vendor/squizlabs/php_codesniffer/bin/phpcs --standard=PSR2 --extensions=php,inc,lib src/",
       "vendor/squizlabs/php_codesniffer/bin/phpcs --standard=PSR2 --extensions=php,inc,lib tests/"
     ],
-    "tests": "vendor/phpunit/phpunit/phpunit -c phpunit.xml.dist"
+    "tests": "vendor/phpunit/phpunit/phpunit -c phpunit.xml.dist --no-coverage",
+    "coverage": "vendor/phpunit/phpunit/phpunit -c phpunit.xml.dist"
   }
 }
