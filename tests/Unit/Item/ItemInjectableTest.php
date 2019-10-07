@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Tests\Unit\Item;
 
 use PHPUnit\Framework\TestCase;
+use RedRat\Presenthor\Item\DataItemInterface;
+use RedRat\Presenthor\Item\ItemInjectableInterface;
 
 /**
  * ItemInjectable Test
@@ -25,8 +27,125 @@ class ItemInjectableTest extends TestCase
             'null', null,
         ];
 
-        self::assertInstanceOf(ItemInjectableInterface::class, null);
-        self::assertEquals($arrayData, null);
-        self::assertEquals(\json_encode($arrayData), null);
+        $itemInjectable = self::getItemInjectableMock($arrayData);
+
+        self::assertInstanceOf(ItemInjectableInterface::class, $itemInjectable);
+        self::assertEquals($arrayData, $itemInjectable->toArray());
+        self::assertEquals(\json_encode($arrayData), $itemInjectable->toJson());
+    }
+
+    /**
+     * @return void
+     */
+    public function testGetDataItem(): void
+    {
+        $itemInjectable = self::getItemInjectableMock([]);
+        $dataItem = self::getDataItemMock([]);
+        $response = $itemInjectable->setDataItem($dataItem);
+
+        self::assertNull($response);
+    }
+
+    /**
+     * @return void
+     */
+    public function testSetDataItem(): void
+    {
+        $itemInjectable = self::getItemInjectableMock([]);
+        self::assertInstanceOf(DataItemInterface::class, $itemInjectable->getDataItem());
+    }
+
+    /**
+     * @param array $arrayData
+     * @return ItemInjectableInterface
+     */
+    public static function getItemInjectableMock(array $arrayData): ItemInjectableInterface
+    {
+        $dataItem = self::getDataItemMock($arrayData);
+
+        return new class($dataItem) implements ItemInjectableInterface
+        {
+            /**
+             * @var DataItemInterface
+             */
+            private $dataItem;
+
+            /**
+             *  constructor.
+             * @param DataItemInterface $dataItem
+             */
+            public function __construct(DataItemInterface $dataItem)
+            {
+                $this->dataItem = $dataItem;
+            }
+
+            /**
+             * {@inheritDoc}
+             */
+            public function getDataItem(): DataItemInterface
+            {
+                return $this->dataItem;
+            }
+
+            /**
+             * {@inheritDoc}
+             */
+            public function setDataItem(DataItemInterface $dataItem): void
+            {
+                $this->dataItem = $dataItem;
+            }
+
+            /**
+             * {@inheritDoc}
+             */
+            public function toArray(): array
+            {
+                return $this
+                    ->dataItem
+                    ->getArrayData()
+                ;
+            }
+
+            /**
+             * {@inheritDoc}
+             */
+            public function toJson(): string
+            {
+                return \json_encode($this->toArray());
+            }
+        };
+    }
+
+    /**
+     * @param array $arrayData
+     * @return DataItemInterface
+     */
+    public static function getDataItemMock(array $arrayData): DataItemInterface
+    {
+        return new class($arrayData) implements DataItemInterface
+        {
+            /**
+             * @var array
+             */
+            private $arrayData;
+
+            /**
+             *  constructor
+             *
+             * @param array $arrayData
+             */
+            public function __construct(array $arrayData)
+            {
+                $this->arrayData = $arrayData;
+            }
+
+            /**
+             * @return array
+             */
+            public function getArrayData(): array
+            {
+                return $this->arrayData;
+            }
+        };
     }
 }
