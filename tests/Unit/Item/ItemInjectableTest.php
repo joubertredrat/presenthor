@@ -7,6 +7,7 @@ namespace Tests\Unit\Item;
 use PHPUnit\Framework\TestCase;
 use RedRat\Presenthor\Item\DataItemInterface;
 use RedRat\Presenthor\Item\ItemInjectableInterface;
+use RedRat\Presenthor\Item\ItemInjectableTrait;
 
 /**
  * ItemInjectable Test
@@ -65,35 +66,7 @@ class ItemInjectableTest extends TestCase
 
         return new class($dataItem) implements ItemInjectableInterface
         {
-            /**
-             * @var DataItemInterface
-             */
-            private $dataItem;
-
-            /**
-             *  constructor.
-             * @param DataItemInterface $dataItem
-             */
-            public function __construct(DataItemInterface $dataItem)
-            {
-                $this->dataItem = $dataItem;
-            }
-
-            /**
-             * {@inheritDoc}
-             */
-            public function getDataItem(): DataItemInterface
-            {
-                return $this->dataItem;
-            }
-
-            /**
-             * {@inheritDoc}
-             */
-            public function setDataItem(DataItemInterface $dataItem): void
-            {
-                $this->dataItem = $dataItem;
-            }
+            use ItemInjectableTrait;
 
             /**
              * {@inheritDoc}
