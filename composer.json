@@ -1,0 +1,40 @@
+{
+  "name": "redrat/presenthor",
+  "description": "The crazy presenter pattern library",
+  "keywords": ["php", "presenter", "design pattern"],
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Joubert RedRat",
+      "email": "me+github@redrat.com.br"
+    }
+  ],
+  "minimum-stability": "stable",
+  "autoload": {
+    "psr-4": {
+      "RedRat\\Presenthor\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests/"
+    }
+  },
+  "require": {
+    "php": ">=7.1",
+    "ext-json": "*"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^8.4",
+    "squizlabs/php_codesniffer": "*"
+  },
+  "scripts": {
+    "psr2": [
+      "vendor/squizlabs/php_codesniffer/bin/phpcs --standard=PSR2 --extensions=php,inc,lib src/",
+      "vendor/squizlabs/php_codesniffer/bin/phpcs --standard=PSR2 --extensions=php,inc,lib tests/"
+    ],
+    "tests": "vendor/phpunit/phpunit/phpunit -c phpunit.xml.dist --no-coverage",
+    "coverage": "vendor/phpunit/phpunit/phpunit -c phpunit.xml.dist"
+  }
+}
