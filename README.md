@@ -9,3 +9,32 @@
 [![License](https://poser.pugx.org/redrat/presenthor/license)](https://packagist.org/packages/redrat/presenthor)
 
 The crazy presenter pattern library
+
+#### First question, why?
+
+Because I'm a polemic person and I don't like serializes. Serialize is good? Yes, but for me, in many times is a big solution to solve a little problem.
+
+#### Okay, how to install then?
+
+Easy my friend, install from composer
+
+```bash
+composer require redrat/presenthor
+```
+
+#### How to use?
+
+This library is separated in two parts, an `Item` and `Bag`. 
+All parts implements `OutputInterface`, then output `array` or json in string.
+
+##### Item
+
+An `Item` basically contains a data that will output `array` or `json` and you should to implement in your project based on `ItemInterface` or `ItemInjectableInterface`.
+
+##### Bag
+
+A `Bag` is a collection of `ItemInterface` and you can implement yours based on `ItemBagInterface` or use `ItemBag` implemented in this library.
+
+#### Example
+
+You can view an implementation example in https://github.com/joubertredrat/presenthor-example.
